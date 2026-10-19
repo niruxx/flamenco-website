@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flamenco Shell</title>
+  <meta name="description" content="Flamenco is a Material Design 3 Expressive desktop shell for niri and Hyprland, built with Quickshell. Thirteen palettes, a full Settings app, and a matching greetd login screen.">
+  <meta name="theme-color" content="#140f10">
+  <meta property="og:title" content="Flamenco: a Material 3 Expressive desktop shell">
+  <meta property="og:description" content="Bar, launcher, control center, notifications, lock screen, dock and a full Settings app for niri and Hyprland, built with Quickshell.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/shell/banner-dark.svg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..800&family=Google+Sans+Code:wght@400..600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0&icon_names=add,animation,apps,arrow_back,arrow_forward,auto_awesome,battery_charging_full,bedtime,bolt,brightness_auto,brush,build,chat,check,check_circle,chevron_right,close,computer,content_copy,dark_mode,dashboard_customize,deployed_code,desktop_windows,dock_to_bottom,download,encrypted,extension,favorite,fingerprint,fit_screen,format_paint,grid_view,group,health_and_safety,key,keyboard,light_mode,lightbulb,local_fire_department,lock,lock_open,login,menu,monitor,mouse,movie,new_releases,north_west,notifications,package_2,palette,pause,play_arrow,power_settings_new,print,restart_alt,rocket_launch,screen_share,screenshot_region,search,settings,shield,slideshow,smart_display,space_dashboard,star,support,tab,terminal,toggle_on,toolbar,tune,undo,verified_user,videocam,view_column,view_quilt,volume_up,wallpaper,warning,water_drop,widgets,wifi,workspaces&display=block">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Apply the saved palette before first paint so the page doesn't flash.
+    document.documentElement.classList.remove("no-js");
+    try {
+      // {mode: auto|dark|light, effective: dark|light, vars} written by js/main.js
+      var saved = JSON.parse(localStorage.getItem("flamenco-vars") || "null"), root = document.documentElement;
+      if (saved) {
+        var eff = saved.mode === "auto" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : saved.mode;
+        root.dataset.theme = eff;
+        if (eff === saved.effective) for (var k in saved.vars) root.style.setProperty(k, saved.vars[k]);
+      }
+    } catch (e) {}
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="s-cookie9" viewBox="0 0 100 100"><path d="M50.0 1.0 L52.1 1.3 L54.2 2.2 L56.1 3.5 L57.9 5.1 L59.6 6.8 L61.2 8.3 L62.8 9.6 L64.4 10.4 L66.2 10.8 L68.2 10.9 L70.4 10.7 L72.8 10.5 L75.2 10.5 L77.5 10.7 L79.7 11.3 L81.5 12.5 L82.9 14.1 L83.9 16.1 L84.6 18.3 L84.9 20.7 L85.1 23.1 L85.3 25.3 L85.8 27.2 L86.5 28.9 L87.6 30.4 L89.1 31.8 L90.9 33.1 L92.8 34.4 L94.7 35.9 L96.4 37.6 L97.6 39.5 L98.3 41.5 L98.3 43.6 L97.8 45.8 L96.8 48.0 L95.6 50.0 L94.2 51.9 L93.0 53.8 L92.0 55.5 L91.5 57.3 L91.4 59.2 L91.7 61.2 L92.2 63.3 L92.8 65.6 L93.3 67.9 L93.5 70.3 L93.2 72.5 L92.4 74.5 L91.1 76.2 L89.3 77.5 L87.2 78.5 L84.9 79.3 L82.6 79.9 L80.5 80.5 L78.6 81.3 L77.1 82.3 L75.8 83.6 L74.7 85.3 L73.8 87.3 L72.8 89.5 L71.6 91.6 L70.3 93.5 L68.7 95.0 L66.8 96.0 L64.7 96.5 L62.4 96.4 L60.1 95.8 L57.9 94.9 L55.8 93.9 L53.8 93.0 L51.8 92.4 L50.0 92.1 L48.2 92.4 L46.2 93.0 L44.2 93.9 L42.1 94.9 L39.9 95.8 L37.6 96.4 L35.3 96.5 L33.2 96.0 L31.3 95.0 L29.7 93.5 L28.4 91.6 L27.2 89.5 L26.2 87.3 L25.3 85.3 L24.2 83.6 L22.9 82.3 L21.4 81.3 L19.5 80.5 L17.4 79.9 L15.1 79.3 L12.8 78.5 L10.7 77.5 L8.9 76.2 L7.6 74.5 L6.8 72.5 L6.5 70.3 L6.7 67.9 L7.2 65.6 L7.8 63.3 L8.3 61.2 L8.6 59.2 L8.5 57.3 L8.0 55.5 L7.0 53.8 L5.8 51.9 L4.4 50.0 L3.2 48.0 L2.2 45.8 L1.7 43.6 L1.7 41.5 L2.4 39.5 L3.6 37.6 L5.3 35.9 L7.2 34.4 L9.1 33.1 L10.9 31.8 L12.4 30.4 L13.5 28.9 L14.2 27.2 L14.7 25.3 L14.9 23.1 L15.1 20.7 L15.4 18.3 L16.1 16.1 L17.1 14.1 L18.5 12.5 L20.3 11.3 L22.5 10.7 L24.8 10.5 L27.2 10.5 L29.6 10.7 L31.8 10.9 L33.8 10.8 L35.6 10.4 L37.2 9.6 L38.8 8.3 L40.4 6.8 L42.1 5.1 L43.9 3.5 L45.8 2.2 L47.9 1.3Z"/></symbol>
+<symbol id="s-cookie12" viewBox="0 0 100 100"><path d="M50.0 1.0 L52.1 1.4 L54.2 2.4 L56.1 3.8 L57.9 5.4 L59.6 6.6 L61.4 7.4 L63.4 7.6 L65.5 7.4 L67.8 7.0 L70.2 6.7 L72.5 6.8 L74.5 7.6 L76.2 9.0 L77.4 10.9 L78.3 13.1 L79.1 15.3 L80.0 17.2 L81.2 18.8 L82.8 20.0 L84.7 20.9 L86.9 21.7 L89.1 22.6 L91.0 23.8 L92.4 25.5 L93.2 27.5 L93.3 29.8 L93.0 32.2 L92.6 34.5 L92.4 36.6 L92.6 38.6 L93.4 40.4 L94.6 42.1 L96.2 43.9 L97.6 45.8 L98.6 47.9 L99.0 50.0 L98.6 52.1 L97.6 54.2 L96.2 56.1 L94.6 57.9 L93.4 59.6 L92.6 61.4 L92.4 63.4 L92.6 65.5 L93.0 67.8 L93.3 70.2 L93.2 72.5 L92.4 74.5 L91.0 76.2 L89.1 77.4 L86.9 78.3 L84.7 79.1 L82.8 80.0 L81.2 81.2 L80.0 82.8 L79.1 84.7 L78.3 86.9 L77.4 89.1 L76.2 91.0 L74.5 92.4 L72.5 93.2 L70.2 93.3 L67.8 93.0 L65.5 92.6 L63.4 92.4 L61.4 92.6 L59.6 93.4 L57.9 94.6 L56.1 96.2 L54.2 97.6 L52.1 98.6 L50.0 99.0 L47.9 98.6 L45.8 97.6 L43.9 96.2 L42.1 94.6 L40.4 93.4 L38.6 92.6 L36.6 92.4 L34.5 92.6 L32.2 93.0 L29.8 93.3 L27.5 93.2 L25.5 92.4 L23.8 91.0 L22.6 89.1 L21.7 86.9 L20.9 84.7 L20.0 82.8 L18.8 81.2 L17.2 80.0 L15.3 79.1 L13.1 78.3 L10.9 77.4 L9.0 76.2 L7.6 74.5 L6.8 72.5 L6.7 70.2 L7.0 67.8 L7.4 65.5 L7.6 63.4 L7.4 61.4 L6.6 59.6 L5.4 57.9 L3.8 56.1 L2.4 54.2 L1.4 52.1 L1.0 50.0 L1.4 47.9 L2.4 45.8 L3.8 43.9 L5.4 42.1 L6.6 40.4 L7.4 38.6 L7.6 36.6 L7.4 34.5 L7.0 32.2 L6.7 29.8 L6.8 27.5 L7.6 25.5 L9.0 23.8 L10.9 22.6 L13.1 21.7 L15.3 20.9 L17.2 20.0 L18.8 18.8 L20.0 17.2 L20.9 15.3 L21.7 13.1 L22.6 10.9 L23.8 9.0 L25.5 7.6 L27.5 6.8 L29.8 6.7 L32.2 7.0 L34.5 7.4 L36.6 7.6 L38.6 7.4 L40.4 6.6 L42.1 5.4 L43.9 3.8 L45.8 2.4 L47.9 1.4Z"/></symbol>
+<symbol id="s-clover" viewBox="0 0 100 100"><path d="M50.0 1.0 L52.1 1.1 L54.2 1.5 L56.3 2.2 L58.3 3.2 L60.1 4.4 L61.8 5.9 L63.3 7.7 L64.6 9.9 L65.0 13.8 L65.1 17.6 L65.7 19.8 L66.4 21.7 L67.0 23.3 L67.7 24.7 L68.4 26.0 L69.1 27.2 L69.9 28.3 L70.8 29.2 L71.7 30.1 L72.8 30.9 L74.0 31.6 L75.3 32.3 L76.7 33.0 L78.3 33.6 L80.2 34.3 L82.4 34.9 L86.2 35.0 L90.1 35.4 L92.3 36.7 L94.1 38.2 L95.6 39.9 L96.8 41.7 L97.8 43.7 L98.5 45.8 L98.9 47.9 L99.0 50.0 L98.9 52.1 L98.5 54.2 L97.8 56.3 L96.8 58.3 L95.6 60.1 L94.1 61.8 L92.3 63.3 L90.1 64.6 L86.2 65.0 L82.4 65.1 L80.2 65.7 L78.3 66.4 L76.7 67.0 L75.3 67.7 L74.0 68.4 L72.8 69.1 L71.7 69.9 L70.8 70.8 L69.9 71.7 L69.1 72.8 L68.4 74.0 L67.7 75.3 L67.0 76.7 L66.4 78.3 L65.7 80.2 L65.1 82.4 L65.0 86.2 L64.6 90.1 L63.3 92.3 L61.8 94.1 L60.1 95.6 L58.3 96.8 L56.3 97.8 L54.2 98.5 L52.1 98.9 L50.0 99.0 L47.9 98.9 L45.8 98.5 L43.7 97.8 L41.7 96.8 L39.9 95.6 L38.2 94.1 L36.7 92.3 L35.4 90.1 L35.0 86.2 L34.9 82.4 L34.3 80.2 L33.6 78.3 L33.0 76.7 L32.3 75.3 L31.6 74.0 L30.9 72.8 L30.1 71.7 L29.2 70.8 L28.3 69.9 L27.2 69.1 L26.0 68.4 L24.7 67.7 L23.3 67.0 L21.7 66.4 L19.8 65.7 L17.6 65.1 L13.8 65.0 L9.9 64.6 L7.7 63.3 L5.9 61.8 L4.4 60.1 L3.2 58.3 L2.2 56.3 L1.5 54.2 L1.1 52.1 L1.0 50.0 L1.1 47.9 L1.5 45.8 L2.2 43.7 L3.2 41.7 L4.4 39.9 L5.9 38.2 L7.7 36.7 L9.9 35.4 L13.8 35.0 L17.6 34.9 L19.8 34.3 L21.7 33.6 L23.3 33.0 L24.7 32.3 L26.0 31.6 L27.2 30.9 L28.3 30.1 L29.2 29.2 L30.1 28.3 L30.9 27.2 L31.6 26.0 L32.3 24.7 L33.0 23.3 L33.6 21.7 L34.3 19.8 L34.9 17.6 L35.0 13.8 L35.4 9.9 L36.7 7.7 L38.2 5.9 L39.9 4.4 L41.7 3.2 L43.7 2.2 L45.8 1.5 L47.9 1.1Z"/></symbol>
+<symbol id="s-sunny" viewBox="0 0 100 100"><path d="M50.0 1.0 L52.1 1.3 L54.2 2.2 L56.1 3.6 L57.9 5.3 L59.5 7.2 L61.0 9.1 L62.4 10.7 L63.8 12.0 L65.4 12.9 L67.1 13.3 L69.0 13.4 L71.2 13.3 L73.5 13.0 L76.0 12.8 L78.5 12.9 L80.8 13.3 L82.9 14.1 L84.6 15.4 L85.9 17.1 L86.7 19.2 L87.1 21.5 L87.2 24.0 L87.0 26.5 L86.7 28.8 L86.6 31.0 L86.7 32.9 L87.1 34.6 L88.0 36.2 L89.3 37.6 L90.9 39.0 L92.8 40.5 L94.7 42.1 L96.4 43.9 L97.8 45.8 L98.7 47.9 L99.0 50.0 L98.7 52.1 L97.8 54.2 L96.4 56.1 L94.7 57.9 L92.8 59.5 L90.9 61.0 L89.3 62.4 L88.0 63.8 L87.1 65.4 L86.7 67.1 L86.6 69.0 L86.7 71.2 L87.0 73.5 L87.2 76.0 L87.1 78.5 L86.7 80.8 L85.9 82.9 L84.6 84.6 L82.9 85.9 L80.8 86.7 L78.5 87.1 L76.0 87.2 L73.5 87.0 L71.2 86.7 L69.0 86.6 L67.1 86.7 L65.4 87.1 L63.8 88.0 L62.4 89.3 L61.0 90.9 L59.5 92.8 L57.9 94.7 L56.1 96.4 L54.2 97.8 L52.1 98.7 L50.0 99.0 L47.9 98.7 L45.8 97.8 L43.9 96.4 L42.1 94.7 L40.5 92.8 L39.0 90.9 L37.6 89.3 L36.2 88.0 L34.6 87.1 L32.9 86.7 L31.0 86.6 L28.8 86.7 L26.5 87.0 L24.0 87.2 L21.5 87.1 L19.2 86.7 L17.1 85.9 L15.4 84.6 L14.1 82.9 L13.3 80.8 L12.9 78.5 L12.8 76.0 L13.0 73.5 L13.3 71.2 L13.4 69.0 L13.3 67.1 L12.9 65.4 L12.0 63.8 L10.7 62.4 L9.1 61.0 L7.2 59.5 L5.3 57.9 L3.6 56.1 L2.2 54.2 L1.3 52.1 L1.0 50.0 L1.3 47.9 L2.2 45.8 L3.6 43.9 L5.3 42.1 L7.2 40.5 L9.1 39.0 L10.7 37.6 L12.0 36.2 L12.9 34.6 L13.3 32.9 L13.4 31.0 L13.3 28.8 L13.0 26.5 L12.8 24.0 L12.9 21.5 L13.3 19.2 L14.1 17.1 L15.4 15.4 L17.1 14.1 L19.2 13.3 L21.5 12.9 L24.0 12.8 L26.5 13.0 L28.8 13.3 L31.0 13.4 L32.9 13.3 L34.6 12.9 L36.2 12.0 L37.6 10.7 L39.0 9.1 L40.5 7.2 L42.1 5.3 L43.9 3.6 L45.8 2.2 L47.9 1.3Z"/></symbol>
+<symbol id="s-flower" viewBox="0 0 100 100"><path d="M50.0 1.0 L52.1 1.3 L54.2 2.0 L56.1 3.3 L57.9 5.0 L59.5 7.2 L60.7 10.2 L61.6 13.3 L62.5 15.6 L63.5 17.5 L64.4 19.0 L65.5 20.3 L66.7 21.1 L68.0 21.7 L69.6 22.0 L71.4 22.1 L73.6 21.9 L76.0 21.6 L79.1 20.9 L82.3 20.4 L85.0 20.6 L87.4 21.3 L89.4 22.4 L91.1 23.8 L92.4 25.5 L93.3 27.5 L93.6 29.7 L93.5 32.0 L92.9 34.4 L91.8 36.8 L89.8 39.3 L87.6 41.7 L86.1 43.6 L84.9 45.4 L84.0 47.0 L83.5 48.5 L83.3 50.0 L83.5 51.5 L84.0 53.0 L84.9 54.6 L86.1 56.4 L87.6 58.3 L89.8 60.7 L91.8 63.2 L92.9 65.6 L93.5 68.0 L93.6 70.3 L93.3 72.5 L92.4 74.5 L91.1 76.2 L89.4 77.6 L87.4 78.7 L85.0 79.4 L82.3 79.6 L79.1 79.1 L76.0 78.4 L73.6 78.1 L71.4 77.9 L69.6 78.0 L68.0 78.3 L66.7 78.9 L65.5 79.7 L64.4 81.0 L63.5 82.5 L62.5 84.4 L61.6 86.7 L60.7 89.8 L59.5 92.8 L57.9 95.0 L56.1 96.7 L54.2 98.0 L52.1 98.7 L50.0 99.0 L47.9 98.7 L45.8 98.0 L43.9 96.7 L42.1 95.0 L40.5 92.8 L39.3 89.8 L38.4 86.7 L37.5 84.4 L36.5 82.5 L35.6 81.0 L34.5 79.7 L33.3 78.9 L32.0 78.3 L30.4 78.0 L28.6 77.9 L26.4 78.1 L24.0 78.4 L20.9 79.1 L17.7 79.6 L15.0 79.4 L12.6 78.7 L10.6 77.6 L8.9 76.2 L7.6 74.5 L6.7 72.5 L6.4 70.3 L6.5 68.0 L7.1 65.6 L8.2 63.2 L10.2 60.7 L12.4 58.3 L13.9 56.4 L15.1 54.6 L16.0 53.0 L16.5 51.5 L16.7 50.0 L16.5 48.5 L16.0 47.0 L15.1 45.4 L13.9 43.6 L12.4 41.7 L10.2 39.3 L8.2 36.8 L7.1 34.4 L6.5 32.0 L6.4 29.7 L6.7 27.5 L7.6 25.5 L8.9 23.8 L10.6 22.4 L12.6 21.3 L15.0 20.6 L17.7 20.4 L20.9 20.9 L24.0 21.6 L26.4 21.9 L28.6 22.1 L30.4 22.0 L32.0 21.7 L33.3 21.1 L34.5 20.3 L35.6 19.0 L36.5 17.5 L37.5 15.6 L38.4 13.3 L39.3 10.2 L40.5 7.2 L42.1 5.0 L43.9 3.3 L45.8 2.0 L47.9 1.3Z"/></symbol>
+<symbol id="s-puffy" viewBox="0 0 100 100"><path d="M50.0 1.0 L52.1 1.1 L54.2 1.5 L56.3 2.1 L58.3 3.0 L60.2 4.2 L61.9 5.6 L63.4 7.4 L64.6 9.9 L65.9 11.6 L67.2 13.0 L68.5 14.4 L69.8 15.6 L71.1 16.8 L72.5 17.9 L73.9 18.9 L75.3 19.8 L76.9 20.7 L78.5 21.5 L80.2 22.3 L82.0 23.1 L84.1 23.9 L86.9 24.2 L89.0 25.2 L90.8 26.4 L92.4 27.9 L93.8 29.6 L95.0 31.3 L96.0 33.3 L96.7 35.3 L97.2 37.3 L97.5 39.5 L97.4 41.6 L97.2 43.8 L96.6 45.9 L95.7 48.0 L94.1 50.0 L92.4 51.9 L91.3 53.6 L90.3 55.3 L89.4 57.0 L88.7 58.6 L88.0 60.2 L87.4 61.8 L86.9 63.4 L86.5 65.1 L86.1 66.8 L85.8 68.6 L85.6 70.5 L85.4 72.6 L85.4 74.8 L85.9 77.6 L85.6 79.8 L84.9 81.9 L83.9 83.9 L82.7 85.7 L81.4 87.4 L79.8 88.9 L78.1 90.1 L76.2 91.2 L74.3 92.0 L72.2 92.6 L70.0 93.0 L67.8 93.1 L65.6 92.8 L63.1 91.5 L60.9 90.8 L58.9 90.3 L57.0 89.9 L55.2 89.6 L53.4 89.4 L51.7 89.2 L50.0 89.2 L48.3 89.2 L46.6 89.4 L44.8 89.6 L43.0 89.9 L41.1 90.3 L39.1 90.8 L36.9 91.5 L34.4 92.8 L32.2 93.1 L30.0 93.0 L27.8 92.6 L25.7 92.0 L23.8 91.2 L21.9 90.1 L20.2 88.9 L18.6 87.4 L17.3 85.7 L16.1 83.9 L15.1 81.9 L14.4 79.8 L14.1 77.6 L14.6 74.8 L14.6 72.6 L14.4 70.5 L14.2 68.6 L13.9 66.8 L13.5 65.1 L13.1 63.4 L12.6 61.8 L12.0 60.2 L11.3 58.6 L10.6 57.0 L9.7 55.3 L8.7 53.6 L7.6 51.9 L5.9 50.0 L4.3 48.0 L3.4 45.9 L2.8 43.8 L2.6 41.6 L2.5 39.5 L2.8 37.3 L3.3 35.3 L4.0 33.3 L5.0 31.3 L6.2 29.6 L7.6 27.9 L9.2 26.4 L11.0 25.2 L13.1 24.2 L15.9 23.9 L18.0 23.1 L19.8 22.3 L21.5 21.5 L23.1 20.7 L24.7 19.8 L26.1 18.9 L27.5 17.9 L28.9 16.8 L30.2 15.6 L31.5 14.4 L32.8 13.0 L34.1 11.6 L35.4 9.9 L36.6 7.4 L38.1 5.6 L39.8 4.2 L41.7 3.0 L43.7 2.1 L45.8 1.5 L47.9 1.1Z"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Flamenco home">
+      <span class="logo"><span class="ms fill">local_fire_department</span></span>
+      Flamenco
+    </a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#tour">Tour</a>
+      <a href="#why">Why Flamenco</a>
+      <a href="#features">Features</a>
+      <a href="#palettes">Palettes</a>
+      <a href="#greeter">Greeter</a>
+      <a href="#install">Install</a>
+      <a href="#help">Help</a>
+    </nav>
+    <div class="bar-actions">
+      <button class="icon-btn" id="palette-btn" aria-expanded="false" aria-controls="palette-pop" title="Palette and mode">
+        <span class="ms">palette</span><span class="sr-only">Change palette</span>
+      </button>
+      <a class="icon-btn" href="https://github.com/niruxx/Flamenco" title="Flamenco on GitHub" aria-label="Flamenco on GitHub">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+      <button class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav" title="Menu">
+        <span class="ms">menu</span><span class="sr-only">Menu</span>
+      </button>
+    </div>
+  </div>
+  <div class="popover" id="palette-pop" hidden role="dialog" aria-label="Palette and mode">
+    <h3>Palette: <span id="pal-current">Flamenco</span></h3>
+    <div class="swatches" id="swatches" role="radiogroup" aria-label="Palette"></div>
+    <div class="mode-row">
+      <h3>Mode</h3>
+      <div class="segmented" role="group" aria-label="Color mode">
+        <button data-mode="auto" aria-pressed="true"><span class="ms">brightness_auto</span>Auto</button>
+        <button data-mode="dark" aria-pressed="false"><span class="ms">dark_mode</span>Dark</button>
+        <button data-mode="light" aria-pressed="false"><span class="ms">light_mode</span>Light</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-meta">
+        <span class="chip"><span class="ms">new_releases</span><span data-shell-version>v0.36.7</span></span>
+        <span class="chip"><span class="ms">view_column</span>niri &amp; Hyprland</span>
+        <span class="chip"><span class="ms">deployed_code</span>Quickshell</span>
+      </div>
+      <h1>Your desktop, <span class="accent">expressive.</span></h1>
+      <p class="lead">Flamenco is a complete Material Design 3 Expressive desktop shell for the niri scrolling compositor and Hyprland. It includes the bar, launcher, control center, notifications, lock screen, dock and a full Settings app, all in one look that carries through to your Qt and GTK apps.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-filled btn-lg" href="#install"><span class="ms">download</span>Install Flamenco</a>
+        <a class="btn btn-tonal btn-lg" href="#tour"><span class="ms fill">play_arrow</span>Take the tour</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>13</b><span>palettes, dark &amp; light</span></div>
+        <div class="stat"><b>28</b><span>Settings pages, all live</span></div>
+        <div class="stat"><b>0</b><span>extra daemons to wire up</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg class="shape blob b1" viewBox="0 0 100 100"><use href="#s-cookie12"/></svg>
+      <svg class="shape blob b2" viewBox="0 0 100 100"><use href="#s-clover"/></svg>
+      <svg class="shape blob b3" viewBox="0 0 100 100"><use href="#s-sunny"/></svg>
+      <div class="frame f-main"><img src="assets/shell/crop/settings-appearance.webp" alt="" width="810" height="614" fetchpriority="high"></div>
+      <div class="frame f-login"><img src="assets/greeter/login-dark.webp" alt="" width="1920" height="1200"></div>
+      <div class="frame f-cc"><img src="assets/shell/crop/control-center.webp" alt="" width="350" height="475"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TOUR ===================== -->
+<section class="section tour" id="tour">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow"><span class="ms">smart_display</span>Take the tour</div>
+      <h2 class="h2">See it <em>in motion.</em></h2>
+      <p class="lead">A guided walk through the shell and the login screen. Press play, or jump to a chapter.</p>
+    </div>
+
+    <!-- If assets/video/tour.mp4 exists, main.js adds a "Video" tab next to this tour automatically. -->
+    <div class="tour-tabs segmented" id="tour-tabs" role="tablist" aria-label="Tour format" hidden>
+      <button role="tab" aria-selected="true" data-tour="slides"><span class="ms">slideshow</span>Guided tour</button>
+      <button role="tab" aria-selected="false" data-tour="video"><span class="ms">movie</span>Video</button>
+    </div>
+    <div class="video-wrap" id="tour-video" hidden></div>
+
+    <div id="tour-slides" class="reveal">
+      <div class="player" id="player">
+        <div class="stage" id="stage">
+          <button class="bigplay" id="bigplay" aria-label="Play the tour">
+            <svg class="shape" viewBox="0 0 100 100" aria-hidden="true"><use href="#s-cookie9"/></svg>
+            <span class="ms fill">play_arrow</span>
+          </button>
+        </div>
+        <div class="caption" id="caption" aria-live="polite"><h3></h3><p></p></div>
+      </div>
+      <div class="player-bar">
+        <button class="play-toggle" id="play-toggle" aria-pressed="false" aria-label="Play">
+          <span class="ms fill">play_arrow</span>
+        </button>
+        <div class="progress" id="progress" aria-label="Tour progress"></div>
+      </div>
+      <div class="chapters" id="chapters" aria-label="Chapters"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY ===================== -->
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="ms">favorite</span>Why Flamenco</div>
+      <h2 class="h2">One shell. <em>Everything</em> in it.</h2>
+      <p class="lead">Flamenco replaces the usual mix of bar, notification daemon, wallpaper tool, lock screen and config files with one shell that looks and works the same everywhere.</p>
+    </div>
+    <div class="bento">
+      <article class="card wide hl reveal">
+        <div class="badge"><svg viewBox="0 0 100 100"><use href="#s-cookie9"/></svg><span class="ms">palette</span></div>
+        <h3>One look, everywhere</h3>
+        <p>Thirteen palettes in dark and light, your own accent, or colors from your wallpaper. Qt, GTK and KDE apps, cursors and icons all follow along, and switching palettes cross-fades across the whole shell.</p>
+      </article>
+      <article class="card wide reveal">
+        <div class="badge t2"><svg viewBox="0 0 100 100"><use href="#s-flower"/></svg><span class="ms">settings</span></div>
+        <h3>A real Settings app</h3>
+        <p>28 pages, from keyboard shortcuts and displays to the firewall, printers and Flatpak permissions. Search any setting with <kbd>Ctrl</kbd> <kbd>F</kbd>. Every change applies live, with no config files to edit by hand.</p>
+      </article>
+      <article class="card reveal">
+        <div class="badge t3"><svg viewBox="0 0 100 100"><use href="#s-clover"/></svg><span class="ms">view_column</span></div>
+        <h3>Made for niri</h3>
+        <p>Writes a complete, validated niri config. Also runs on Hyprland, with either the Lua or the classic config.</p>
+      </article>
+      <article class="card reveal">
+        <div class="badge"><svg viewBox="0 0 100 100"><use href="#s-puffy"/></svg><span class="ms">verified_user</span></div>
+        <h3>Safe by default</h3>
+        <p>Config edits are checked with <code>niri validate</code> and backed up first. Display changes revert on their own after 15 seconds.</p>
+      </article>
+      <article class="card reveal">
+        <div class="badge t2"><svg viewBox="0 0 100 100"><use href="#s-sunny"/></svg><span class="ms">fit_screen</span></div>
+        <h3>Fits any screen</h3>
+        <p>The bar measures itself and compacts step by step on narrow or rotated screens. Popouts scroll instead of overflowing.</p>
+      </article>
+      <article class="card wide reveal">
+        <div class="badge t3"><svg viewBox="0 0 100 100"><use href="#s-cookie12"/></svg><span class="ms">battery_charging_full</span></div>
+        <h3>Batteries included</h3>
+        <p>A built-in notification daemon, lock screen with fingerprint unlock, wallpaper with animated transitions, OSD, hot corners, screenshots and screen recording.</p>
+      </article>
+      <article class="card wide reveal">
+        <div class="badge"><svg viewBox="0 0 100 100"><use href="#s-flower"/></svg><span class="ms">extension</span></div>
+        <h3>Plugins, including other shells'</h3>
+        <p>Add bar widgets and launcher extensions from a git link. Flamenco also runs plugins made for Noctalia Shell and DankMaterialShell, in its own look.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="section" id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="ms">auto_awesome</span>Features</div>
+      <h2 class="h2">Everything you'd expect. <em>Then some.</em></h2>
+    </div>
+    <div class="segmented feature-tabs" role="tablist" aria-label="Feature groups">
+      <button role="tab" aria-selected="true" aria-controls="f-desktop" id="t-desktop"><span class="ms">desktop_windows</span>On the desktop</button>
+      <button role="tab" aria-selected="false" aria-controls="f-input" id="t-input"><span class="ms">keyboard</span>Windows &amp; input</button>
+      <button role="tab" aria-selected="false" aria-controls="f-system" id="t-system"><span class="ms">tune</span>System</button>
+      <button role="tab" aria-selected="false" aria-controls="f-look" id="t-look"><span class="ms">brush</span>Look &amp; apps</button>
+    </div>
+
+    <div class="feature-panel" id="f-desktop" role="tabpanel" aria-labelledby="t-desktop">
+      <div class="feat"><span class="ico"><span class="ms">toolbar</span></span><div><h3>Bar</h3><p>Floating, attached or "islands", on any edge. Over 20 reorderable widgets, from workspaces and media to a clipboard history.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">toggle_on</span></span><div><h3>Control center</h3><p>Sliders and tiles you pick, reorder and size yourself, with Wi-Fi, Bluetooth and audio pages that slide in.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">search</span></span><div><h3>Launcher</h3><p>Fuzzy search ranked by use. <code>=</code> calculator, <code>&gt;</code> run command, <code>;</code> clipboard history.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">space_dashboard</span></span><div><h3>Dashboard</h3><p>Greeting, media with a visualizer, calendar agenda, weather and live system graphs, opened from the clock.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">notifications</span></span><div><h3>Notifications</h3><p>A built-in daemon with swipe-to-dismiss popups, actions, Do not disturb and a full-height shade. History survives restarts.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">tab</span></span><div><h3>App switcher</h3><p><kbd>Alt</kbd> <kbd>Tab</kbd> as Material 3 cards, most recent first, with optional window previews.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">grid_view</span></span><div><h3>Overview</h3><p>An optional GNOME-style overview: search, drag windows between workspaces, or just tap <kbd>Super</kbd>.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">dock_to_bottom</span></span><div><h3>Dock</h3><p>Optional, on any edge, with magnification, auto-hide and running indicators.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">widgets</span></span><div><h3>Desktop widgets</h3><p>Clock, weather, stats, now playing, calendar and notes. Drag them onto the desktop and resize them.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">wallpaper</span></span><div><h3>Wallpaper</h3><p>A cover-flow picker, Wallhaven search, nine animated transitions, auto-cycle and colors from the wallpaper.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">lock</span></span><div><h3>Lock screen</h3><p>Password or fingerprint, a blurred wallpaper that clears as you unlock, media controls, and auto-lock on idle.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">animation</span></span><div><h3>Login &amp; logout animations</h3><p>Bloom, Curtain, Blinds, Zoom or Fade over your wallpaper, with a greeting.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">chat</span></span><div><h3>AI assistant</h3><p>A chat panel for Claude, OpenAI, Gemini, OpenRouter, or a local model in Ollama or LM Studio. Keys stay in your keyring.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">extension</span></span><div><h3>Plugins</h3><p>Your own widgets and launcher extensions, plus Noctalia and DankMaterialShell plugins.</p></div></div>
+    </div>
+
+    <div class="feature-panel" id="f-input" role="tabpanel" aria-labelledby="t-input" hidden>
+      <div class="feat"><span class="ico"><span class="ms">view_quilt</span></span><div><h3>Windows &amp; layout</h3><p>Gaps, corner radius, focus ring, borders and shadows, written to your niri or Hyprland config.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">workspaces</span></span><div><h3>Workspaces</h3><p>Named workspaces pinned to a screen, with switcher options for the bar.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">north_west</span></span><div><h3>Screen edges</h3><p>Hot corners on every screen for the overview, launcher, dashboard, screenshots, lock and more.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">screenshot_region</span></span><div><h3>Screenshots</h3><p>Area, screen or window. Save to disk or only to the clipboard, with a delay if you need one.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">videocam</span></span><div><h3>Screen recording</h3><p>Record a screen or an area from quick settings with wf-recorder or gpu-screen-recorder.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">keyboard</span></span><div><h3>Keyboard &amp; shortcuts</h3><p>Layouts, repeat rate, Compose, and shortcuts you record with a keypress. Reset one or all of them to the defaults.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">mouse</span></span><div><h3>Mouse &amp; touchpad</h3><p>Speed, acceleration, natural scrolling, tap to click, and disable while typing.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">monitor</span></span><div><h3>Displays</h3><p>Resolution, refresh rate, scale, rotation and VRR, with drag-to-arrange and a 15-second auto-revert.</p></div></div>
+    </div>
+
+    <div class="feature-panel" id="f-system" role="tabpanel" aria-labelledby="t-system" hidden>
+      <div class="feat"><span class="ico"><span class="ms">wifi</span></span><div><h3>Network &amp; VPN</h3><p>Edit Wi-Fi and wired connections in Settings, plus WireGuard and OpenVPN through NetworkManager.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">volume_up</span></span><div><h3>Sound</h3><p>Sound themes shared with GTK and KDE apps, event sounds, and output and input devices.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">key</span></span><div><h3>Keyring</h3><p>Choose GNOME Keyring, KDE Wallet, KeePassXC or oo7, and see whether it unlocks at login.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">shield</span></span><div><h3>Firewall</h3><p>ufw or firewalld: policies, zones, ports and rules, applied with one sudo prompt.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">screen_share</span></span><div><h3>Screen sharing</h3><p>Pick the portal backend. The lightweight wlr setup avoids pulling in GNOME.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">print</span></span><div><h3>Printers</h3><p>Start CUPS, set the default printer, print a test page and manage the queue.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">bolt</span></span><div><h3>Power</h3><p>Power profiles, idle suspend, lock before sleep, lid actions and the power button.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">health_and_safety</span></span><div><h3>System check</h3><p><code>flamenco doctor</code> lists anything missing and gives you the exact install command.</p></div></div>
+    </div>
+
+    <div class="feature-panel" id="f-look" role="tabpanel" aria-labelledby="t-look" hidden>
+      <div class="feat"><span class="ico"><span class="ms">settings</span></span><div><h3>Settings app</h3><p>Its own window with a page for every module and a search box that finds any setting.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">format_paint</span></span><div><h3>App theming</h3><p>Qt 5/6 and GTK 3/4 apps follow your palette, with optional custom QSS and CSS.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">dashboard_customize</span></span><div><h3>Layout presets</h3><p>Modern, Minimal, Classic, Dock &amp; menu bar, or Vertical, each applied in one click.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">apps</span></span><div><h3>Default apps</h3><p>Browser, files, mail, editor, images, video, music, PDF, archives and terminal.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">rocket_launch</span></span><div><h3>Auto-start</h3><p>Turn XDG autostart entries on or off, or add apps and plain commands.</p></div></div>
+      <div class="feat"><span class="ico"><span class="ms">lock_open</span></span><div><h3>Flatpak permissions</h3><p>Per-app overrides for files, network, devices and features.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SETTINGS RAIL ===================== -->
+<section class="section" id="settings-app" style="padding-top:0">
+  <div class="wrap">
+    <div class="rail-head reveal">
+      <div>
+        <h2 class="subhead">A page for everything</h2>
+        <p>A selection of the 28 Settings pages. Click any page to see the full screenshot.</p>
+      </div>
+      <div class="rail-nav">
+        <button class="icon-btn" data-rail="-1" aria-label="Previous pages"><span class="ms">arrow_back</span></button>
+        <button class="icon-btn" data-rail="1" aria-label="Next pages"><span class="ms">arrow_forward</span></button>
+      </div>
+    </div>
+    <div class="rail" id="settings-rail" tabindex="0" aria-label="Settings pages"></div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section class="section" id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="rail-head reveal"><div><h2 class="subhead">Around the shell</h2><p>Click any screenshot to see the whole screen.</p></div></div>
+    <div class="shots" data-gallery>
+      <button class="shot s6 reveal" data-full="assets/shell/desktop.webp" data-title="The desktop, with the first-run setup">
+        <span class="pic"><img src="assets/shell/desktop.webp" alt="The Flamenco desktop with the first-run setup open" loading="lazy" width="1920" height="1103"></span>
+        <span class="cap"><b>Desktop &amp; first-run setup</b><span>A welcome flow made of the real Settings pages</span></span>
+      </button>
+      <button class="shot s6 reveal" data-full="assets/shell/calendar.webp" data-title="Dashboard">
+        <span class="pic"><img src="assets/shell/crop/calendar.webp" alt="The dashboard with clock and calendar" loading="lazy" style="object-position:50% 20%"></span>
+        <span class="cap"><b>Dashboard</b><span>Clock, calendar, weather and media</span></span>
+      </button>
+      <button class="shot s4 reveal" data-full="assets/shell/launcher.webp" data-title="Launcher">
+        <span class="pic"><img src="assets/shell/crop/launcher.webp" alt="The app launcher" loading="lazy" style="object-position:50% 0"></span>
+        <span class="cap"><b>Launcher</b><span>Apps, calculator, commands, clipboard</span></span>
+      </button>
+      <button class="shot s4 reveal" data-full="assets/shell/control-center.webp" data-title="Control center">
+        <span class="pic"><img src="assets/shell/crop/control-center.webp" alt="The control center" loading="lazy" style="object-position:50% 10%"></span>
+        <span class="cap"><b>Control center</b><span>Your tiles, your order</span></span>
+      </button>
+      <button class="shot s4 reveal" data-full="assets/shell/control-center-light.webp" data-title="Light mode">
+        <span class="pic"><img src="assets/shell/crop/control-center-light.webp" alt="The control center in light mode" loading="lazy" style="object-position:50% 10%"></span>
+        <span class="cap"><b>Light mode</b><span>Every palette, both ways</span></span>
+      </button>
+      <button class="shot s6 reveal" data-full="assets/shell/power-menu.webp" data-title="Power menu">
+        <span class="pic wide"><img src="assets/shell/crop/power-menu.webp" alt="The power menu" loading="lazy"></span>
+        <span class="cap"><b>Power menu</b><span>Hold for 3 seconds to log out, restart or shut down</span></span>
+      </button>
+      <button class="shot s6 reveal" data-full="assets/shell/notification-center.webp" data-title="Notification center">
+        <span class="pic wide"><img src="assets/shell/crop/notification-center.webp" alt="The notification center" loading="lazy"></span>
+        <span class="cap"><b>Notification center</b><span>A drop-down, or a full-height shade</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PALETTES ===================== -->
+<section class="section tour" id="palettes">
+  <div class="wrap palettes">
+    <div class="reveal">
+      <div class="eyebrow"><span class="ms">palette</span>Palettes</div>
+      <h2 class="h2">Thirteen palettes. <em>Or your wallpaper.</em></h2>
+      <p class="lead">Each palette is hand-tuned in dark and light, or you can generate one from your wallpaper with matugen. Pick one below and this page changes to match, the way the shell does.</p>
+      <div class="pal-grid" id="pal-grid" role="radiogroup" aria-label="Palette"></div>
+    </div>
+    <div class="reveal">
+      <div class="lock" id="lock" aria-label="A live preview of the lock screen in the selected palette" role="img">
+        <span class="chip tag"><span class="ms">computer</span><span id="lock-pal">Flamenco</span></span>
+        <div class="clock" id="lock-clock">21:07</div>
+        <div class="date" id="lock-date">Tuesday, 13 October</div>
+        <div class="avatar">F</div>
+        <div class="user">flamenco</div>
+        <div class="pw"><i></i><i></i><i></i><i></i><span class="ms">arrow_forward</span></div>
+        <div class="row">
+          <span><span class="ms">desktop_windows</span>niri</span>
+          <span><span class="ms">bedtime</span></span>
+          <span><span class="ms">restart_alt</span></span>
+          <span><span class="ms">power_settings_new</span></span>
+        </div>
+      </div>
+      <p class="pal-note">A live preview of the lock screen in your chosen palette.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GREETER ===================== -->
+<section class="section" id="greeter">
+  <div class="wrap">
+    <div class="greeter-hero">
+      <div class="reveal">
+        <div class="eyebrow"><span class="ms">login</span>Flamenco Greeter</div>
+        <h2 class="h2">Your theme, <em>from the first screen.</em></h2>
+        <p class="lead">Flamenco Greeter is a login screen for greetd, built from the same components as the shell's lock screen, so logging in, locking and unlocking all look like one screen.</p>
+        <ul class="points">
+          <li><span class="badge"><svg viewBox="0 0 100 100"><use href="#s-cookie9"/></svg><span class="ms">palette</span></span><div><b>Your theme at login</b><span>Palette, mode, accent, roundness, fonts, wallpaper and avatar come from your Flamenco settings.</span></div></li>
+          <li><span class="badge t2"><svg viewBox="0 0 100 100"><use href="#s-clover"/></svg><span class="ms">fingerprint</span></span><div><b>Fingerprint ready</b><span>The reader listens as soon as you're picked, and a typed password always works.</span></div></li>
+          <li><span class="badge t3"><svg viewBox="0 0 100 100"><use href="#s-flower"/></svg><span class="ms">group</span></span><div><b>Every user</b><span>A user picker with avatars. Each user's own theme cross-fades in as you switch.</span></div></li>
+          <li><span class="badge"><svg viewBox="0 0 100 100"><use href="#s-puffy"/></svg><span class="ms">encrypted</span></span><div><b>Private by design</b><span>Only what the login screen needs leaves your home folder, into a folder only the greeter can read.</span></div></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <button class="frame shot" style="position:relative;width:100%" data-full="assets/greeter/login-dark.webp" data-title="Flamenco Greeter">
+          <span class="pic" style="aspect-ratio:1920/1200"><img src="assets/greeter/login-dark.webp" alt="The Flamenco Greeter login screen" loading="lazy" width="1920" height="1200"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="shots" data-gallery style="margin-top:48px">
+      <button class="shot s3 reveal" data-full="assets/greeter/user-picker.webp" data-title="User picker">
+        <span class="pic"><img src="assets/greeter/user-picker.webp" alt="Picking a user" loading="lazy"></span>
+        <span class="cap"><b>User picker</b><span>Avatars, or type a name</span></span>
+      </button>
+      <button class="shot s3 reveal" data-full="assets/greeter/session-picker.webp" data-title="Session chooser">
+        <span class="pic"><img src="assets/greeter/session-picker.webp" alt="Choosing a session" loading="lazy"></span>
+        <span class="cap"><b>Session chooser</b><span>Every Wayland session, and X11</span></span>
+      </button>
+      <button class="shot s3 reveal" data-full="assets/greeter/wrong-password.webp" data-title="Wrong password">
+        <span class="pic"><img src="assets/greeter/wrong-password.webp" alt="A wrong password shakes the field" loading="lazy"></span>
+        <span class="cap"><b>Wrong password</b><span>A shake, and you try again</span></span>
+      </button>
+      <button class="shot s3 reveal" data-full="assets/greeter/login-light.webp" data-title="Light mode">
+        <span class="pic"><img src="assets/greeter/login-light.webp" alt="The login screen in light mode" loading="lazy"></span>
+        <span class="cap"><b>Light mode</b><span>Follows your Flamenco setting</span></span>
+      </button>
+    </div>
+
+    <h3 class="subhead reveal" style="margin:56px 0 20px">Fingerprint login, step by step</h3>
+    <div class="shots steps-flow" data-gallery>
+      <button class="shot s4 reveal" data-full="assets/greeter/fingerprint.webp" data-title="Scan your finger">
+        <span class="pic"><img src="assets/greeter/fingerprint.webp" alt="Scan your finger on the reader" loading="lazy"></span>
+        <span class="cap"><b>Scan your finger</b><span>The reader is already listening</span></span>
+      </button>
+      <button class="shot s4 reveal" data-full="assets/greeter/fingerprint-miss.webp" data-title="Not recognized">
+        <span class="pic"><img src="assets/greeter/fingerprint-miss.webp" alt="Fingerprint not recognized" loading="lazy"></span>
+        <span class="cap"><b>Not recognized?</b><span>What you've typed is kept</span></span>
+      </button>
+      <button class="shot s4 reveal" data-full="assets/greeter/fingerprint-typing.webp" data-title="Or type a password">
+        <span class="pic"><img src="assets/greeter/fingerprint-typing.webp" alt="Typing a password instead" loading="lazy"></span>
+        <span class="cap"><b>Or type a password</b><span>It goes in as soon as the scan ends</span></span>
+      </button>
+    </div>
+
+    <h3 class="subhead reveal" style="margin:56px 0 4px">Wears every palette</h3>
+    <div class="marquee reveal" data-gallery>
+      <div class="marquee-track" id="greeter-marquee"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INSTALL ===================== -->
+<section class="section" id="install">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="ms">download</span>Install</div>
+      <h2 class="h2">Up and running <em>in minutes.</em></h2>
+      <p class="lead">Flamenco ships as an Arch Linux package and installs from source on any distro. Install the shell first; the greeter builds on it.</p>
+    </div>
+
+    <div class="install-shell reveal">
+      <div class="product-tabs" role="tablist" aria-label="Product">
+        <button role="tab" aria-selected="true" aria-controls="p-shell" id="tp-shell">
+          <span class="badge"><svg viewBox="0 0 100 100"><use href="#s-cookie9"/></svg><span class="ms">desktop_windows</span></span>
+          <span><b>Flamenco Shell</b><span data-shell-version-long>Version 0.36.7 · the desktop</span></span>
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="p-greeter" id="tp-greeter">
+          <span class="badge t3"><svg viewBox="0 0 100 100"><use href="#s-flower"/></svg><span class="ms">login</span></span>
+          <span><b>Flamenco Greeter</b><span data-greeter-version-long>Version 0.2.1 · the login screen</span></span>
+        </button>
+      </div>
+
+      <!-- Shell -->
+      <div class="tabpanel" id="p-shell" role="tabpanel" aria-labelledby="tp-shell">
+        <ol class="steps">
+          <li class="step">
+            <h3>Install the dependencies</h3>
+            <div class="body">
+              <p>You need <code>quickshell</code> (0.2 or newer), a compositor (<code>niri</code> or <code>hyprland</code>) and <code>python3</code>. The icon font and Google Sans fonts come bundled. Everything else is optional and switches on one feature each. On Arch:</p>
+<pre class="code"><code><span class="p">$ </span>paru -S quickshell niri \
+        networkmanager brightnessctl matugen-bin cliphist wl-clipboard gammastep \
+        qt5ct qt6ct adw-gtk-theme qt6-imageformats power-profiles-daemon</code></pre>
+              <details class="more">
+                <summary><span class="ms">chevron_right</span>What each optional package enables</summary>
+                <div class="inner table-wrap">
+                  <table>
+                    <thead><tr><th>Package</th><th>Enables</th></tr></thead>
+                    <tbody>
+                      <tr><td><code>networkmanager</code></td><td>Network status and Wi-Fi control</td></tr>
+                      <tr><td><code>brightnessctl</code></td><td>Screen and keyboard brightness sliders and OSD</td></tr>
+                      <tr><td><code>matugen</code></td><td>The "From wallpaper" palette</td></tr>
+                      <tr><td><code>cliphist</code> + <code>wl-clipboard</code></td><td>Clipboard history in the launcher</td></tr>
+                      <tr><td><code>gammastep</code></td><td>Night light</td></tr>
+                      <tr><td><code>qt5ct</code>, <code>qt6ct</code></td><td>Theming Qt apps</td></tr>
+                      <tr><td><code>adw-gtk-theme</code></td><td>GTK 3 apps that look like libadwaita apps</td></tr>
+                      <tr><td><code>qt6-imageformats</code></td><td><code>.webp</code> wallpapers</td></tr>
+                      <tr><td><code>power-profiles-daemon</code>, <code>upower</code>, <code>bluez</code></td><td>Power profile tile, battery, Bluetooth</td></tr>
+                      <tr><td><code>fprintd</code></td><td>Fingerprint enrolling and unlock</td></tr>
+                      <tr><td><code>wf-recorder</code> or <code>gpu-screen-recorder</code></td><td>Screen recording</td></tr>
+                      <tr><td><code>cava</code></td><td>The audio visualizer</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            </div>
+          </li>
+
+          <li class="step">
+            <h3>Install Flamenco</h3>
+            <div class="body">
+              <div class="segmented" role="tablist" aria-label="Install method" data-switch="shell-method">
+                <button role="tab" aria-selected="true" data-value="prebuilt"><span class="ms">package_2</span>Prebuilt package</button>
+                <button role="tab" aria-selected="false" data-value="makepkg"><span class="ms">build</span>Build package</button>
+                <button role="tab" aria-selected="false" data-value="source"><span class="ms">terminal</span>Any distro</button>
+              </div>
+              <div data-case="shell-method" data-value="prebuilt">
+                <p>Download the latest release straight from GitHub and install it with pacman (Arch Linux and derivatives):</p>
+<pre class="code wrap-code"><code><span class="p">$ </span>sudo pacman -U <span data-shell-pkg-url>https://github.com/niruxx/Flamenco/releases/download/0.36.7-1/flamenco-shell-0.36.7-1-any.pkg.tar.zst</span></code></pre>
+              </div>
+              <div data-case="shell-method" data-value="makepkg" hidden>
+                <p>Build the Arch package from a fresh checkout and install it in one go:</p>
+<pre class="code"><code><span class="p">$ </span>git clone https://github.com/niruxx/Flamenco.git
+<span class="p">$ </span>cd Flamenco/packaging/arch
+<span class="p">$ </span>makepkg -si</code></pre>
+              </div>
+              <div data-case="shell-method" data-value="source" hidden>
+                <p>Install to <code>~/.local</code> without a package, or run straight from the checkout while you hack on it (edits hot-reload):</p>
+<pre class="code"><code><span class="p">$ </span>git clone https://github.com/niruxx/Flamenco.git &amp;&amp; cd Flamenco
+<span class="p">$ </span>make install   <span class="c"># → ~/.local/share/flamenco-shell + ~/.local/bin/flamenco</span>
+<span class="c"># or</span>
+<span class="p">$ </span>make dev</code></pre>
+              </div>
+              <p>Then check that everything is found:</p>
+<pre class="code"><code><span class="p">$ </span>flamenco doctor</code></pre>
+            </div>
+          </li>
+
+          <li class="step">
+            <h3>Hook it into your compositor</h3>
+            <div class="body">
+              <div class="segmented" role="tablist" aria-label="Compositor" data-switch="compositor">
+                <button role="tab" aria-selected="true" data-value="niri"><span class="ms">view_column</span>niri</button>
+                <button role="tab" aria-selected="false" data-value="hypr"><span class="ms">water_drop</span>Hyprland</button>
+              </div>
+              <div data-case="compositor" data-value="niri">
+                <p>Write a complete niri config for Flamenco. Your keyboard, display and cursor settings are kept, the old file is backed up, and the new one is checked with <code>niri validate</code> before anything changes.</p>
+<pre class="code"><code><span class="p">$ </span>flamenco niri-config           <span class="c"># add --print to look first</span></code></pre>
+              </div>
+              <div data-case="compositor" data-value="hypr" hidden>
+                <p>Flamenco writes <code>hyprland.lua</code> if you already have one (or no config yet), otherwise <code>hyprland.conf</code>. Your old config is backed up.</p>
+<pre class="code"><code><span class="p">$ </span>flamenco hyprland-config        <span class="c"># or --lua / --conf to choose, --print to look first</span></code></pre>
+              </div>
+              <div class="callout warn"><span class="ms">warning</span><p>The new config doesn't start any other shell. If you used <code>waybar</code>, <code>swaybg</code>, DMS or similar, they're gone; two shells would fight over the bar, notifications and wallpaper.</p></div>
+            </div>
+          </li>
+
+          <li class="step">
+            <h3>Log in and make it yours</h3>
+            <div class="body">
+              <p>Log out and pick <b>niri</b> (or Hyprland) at the login screen. The first time the shell starts, <b>Flamenco Setup</b> walks you through displays, colors, icons, wallpaper, sound, Bluetooth, screen sharing and keyring. Each step is the real Settings page, so changes apply right away.</p>
+<pre class="code"><code><span class="p">$ </span>flamenco run --fg    <span class="c"># start by hand in the foreground (Ctrl+C to stop)</span>
+<span class="p">$ </span>flamenco restart     <span class="c"># after an upgrade</span>
+<span class="p">$ </span>flamenco setup       <span class="c"># run the first-run setup again</span></code></pre>
+              <div class="callout"><span class="ms">lightbulb</span><p>Even if the shell doesn't start, the config still works: <kbd>Mod</kbd> <kbd>T</kbd> opens a terminal and <kbd>Mod</kbd> <kbd>Shift</kbd> <kbd>E</kbd> quits niri.</p></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Greeter -->
+      <div class="tabpanel" id="p-greeter" role="tabpanel" aria-labelledby="tp-greeter" hidden>
+        <ol class="steps">
+          <li class="step">
+            <h3>Install the greeter</h3>
+            <div class="body">
+              <p>You need <b>Flamenco Shell</b> (the greeter reuses its theme code), <code>greetd</code>, <code>quickshell</code>, <code>python</code> and a compositor (<code>niri</code>, <code>hyprland</code> or <code>sway</code>). Add <code>fprintd</code> for fingerprint login.</p>
+              <div class="segmented" role="tablist" aria-label="Install method" data-switch="greeter-method">
+                <button role="tab" aria-selected="true" data-value="prebuilt"><span class="ms">package_2</span>Prebuilt package</button>
+                <button role="tab" aria-selected="false" data-value="makepkg"><span class="ms">build</span>Build package</button>
+                <button role="tab" aria-selected="false" data-value="source"><span class="ms">terminal</span>Any distro</button>
+              </div>
+              <div data-case="greeter-method" data-value="prebuilt">
+<pre class="code wrap-code"><code><span class="p">$ </span>sudo pacman -S --needed greetd quickshell niri
+<span class="p">$ </span>sudo pacman -U "<span data-greeter-pkg-url>https://github.com/niruxx/flamenco-greeter/raw/main/History%20Builds/flamenco-greeter-0.2.1-1/flamenco-greeter-0.2.1-1-any.pkg.tar.zst</span>"</code></pre>
+                <p>Pacman's hooks create the <code>greeter</code> user and its data folder for you.</p>
+              </div>
+              <div data-case="greeter-method" data-value="makepkg" hidden>
+<pre class="code"><code><span class="p">$ </span>git clone https://github.com/niruxx/flamenco-greeter.git
+<span class="p">$ </span>cd flamenco-greeter/packaging/arch
+<span class="p">$ </span>makepkg -si</code></pre>
+              </div>
+              <div data-case="greeter-method" data-value="source" hidden>
+<pre class="code"><code><span class="p">$ </span>git clone https://github.com/niruxx/flamenco-greeter.git &amp;&amp; cd flamenco-greeter
+<span class="p">$ </span>sudo make install                                  <span class="c"># installs to /usr</span>
+<span class="p">$ </span>sudo systemd-sysusers &amp;&amp; sudo systemd-tmpfiles --create</code></pre>
+                <p>If Flamenco Shell isn't at <code>/usr/share/flamenco-shell/shell</code>, add <code>SHELL_DIR=/path/to/flamenco-shell/shell</code> to <code>make install</code>.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="step">
+            <h3>Try it in a window first</h3>
+            <div class="body">
+              <p>Preview the greeter with your current theme before switching anything on. Any password except <code>wrong</code> "logs in", and nothing is actually started.</p>
+<pre class="code"><code><span class="p">$ </span>flamenco-greeter preview</code></pre>
+            </div>
+          </li>
+
+          <li class="step">
+            <h3>Turn it on</h3>
+            <div class="body">
+              <p>This shows what it will write and asks before changing anything. It points greetd at the greeter, makes greetd your display manager (replacing SDDM, GDM or similar), and offers fingerprint login if it finds a reader.</p>
+<pre class="code"><code><span class="p">$ </span>flamenco-greeter enable          <span class="c"># niri; or: enable hyprland | enable sway</span></code></pre>
+            </div>
+          </li>
+
+          <li class="step">
+            <h3>Bring your theme across</h3>
+            <div class="body">
+              <p>Copy your palette, wallpaper and avatar to the login screen. To keep it in sync automatically from then on:</p>
+<pre class="code"><code><span class="p">$ </span>flamenco-greeter sync
+<span class="c"># optional: sync on every change, with no password prompts</span>
+<span class="p">$ </span>sudo usermod -aG greeter $USER   <span class="c"># then log out and back in</span>
+<span class="p">$ </span>systemctl --user enable --now flamenco-greeter-sync.path</code></pre>
+            </div>
+          </li>
+
+          <li class="step">
+            <h3>Check, and reboot</h3>
+            <div class="body">
+<pre class="code"><code><span class="p">$ </span>flamenco-greeter doctor
+<span class="c"> ✓ greetd installed</span>
+<span class="c"> ✓ Quickshell installed</span>
+<span class="c"> ✓ theme synced for you</span>
+<span class="c"> ✓ greetd uses flamenco-greeter</span></code></pre>
+              <details class="more">
+                <summary><span class="ms">chevron_right</span>Set up fingerprint login</summary>
+                <div class="inner">
+<pre class="code"><code><span class="p">$ </span>sudo pacman -S fprintd
+<span class="p">$ </span>fprintd-enroll                         <span class="c"># enroll a finger for your user</span>
+<span class="p">$ </span>flamenco-greeter fingerprint enable    <span class="c"># adds pam_fprintd to /etc/pam.d/greetd (backed up first)</span>
+<span class="p">$ </span>flamenco-greeter fingerprint status</code></pre>
+                </div>
+              </details>
+              <div class="callout"><span class="ms">undo</span><p>Changed your mind? Switch back with <code>sudo systemctl enable -f sddm</code> (or <code>gdm</code>, …) and reboot.</p></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KEYS ===================== -->
+<section class="section" id="keys" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="ms">keyboard</span>Keybindings</div>
+      <h2 class="h2">Learn it <em>in a minute.</em></h2>
+      <p class="lead">The defaults. Change any of them in Settings → Keyboard, and press <kbd>Mod</kbd> <kbd>Shift</kbd> <kbd>/</kbd> to see them all.</p>
+    </div>
+    <div class="keys reveal">
+      <div class="key"><span>App launcher</span><span class="kbd"><kbd>Mod</kbd><kbd>Space</kbd></span></div>
+      <div class="key"><span>Control center</span><span class="kbd"><kbd>Mod</kbd><kbd>A</kbd></span></div>
+      <div class="key"><span>Notification center</span><span class="kbd"><kbd>Mod</kbd><kbd>N</kbd></span></div>
+      <div class="key"><span>Wallpaper picker</span><span class="kbd"><kbd>Mod</kbd><kbd>W</kbd></span></div>
+      <div class="key"><span>Settings</span><span class="kbd"><kbd>Mod</kbd><kbd>,</kbd></span></div>
+      <div class="key"><span>Power menu</span><span class="kbd"><kbd>Mod</kbd><kbd>Esc</kbd></span></div>
+      <div class="key"><span>Lock screen</span><span class="kbd"><kbd>Mod</kbd><kbd>L</kbd></span></div>
+      <div class="key"><span>Terminal</span><span class="kbd"><kbd>Mod</kbd><kbd>T</kbd></span></div>
+      <div class="key"><span>niri overview</span><span class="kbd"><kbd>Mod</kbd><kbd>O</kbd></span></div>
+      <div class="key"><span>App switcher</span><span class="kbd"><kbd>Alt</kbd><kbd>Tab</kbd></span></div>
+      <div class="key"><span>Close window</span><span class="kbd"><kbd>Mod</kbd><kbd>Q</kbd></span></div>
+      <div class="key"><span>Quit niri</span><span class="kbd"><kbd>Mod</kbd><kbd>Shift</kbd><kbd>E</kbd></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HELP ===================== -->
+<section class="section" id="help" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow"><span class="ms">support</span>Help</div>
+      <h2 class="h2">Something <em>not right?</em></h2>
+      <p class="lead">Start with <code>flamenco doctor</code> (or Settings → System check). It lists anything missing and gives you the exact command to install it.</p>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary>Black screen after logging in to niri</summary>
+        <div class="a">
+          <p>Switch to a text console with <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>F3</kbd>, log in, and run <code>flamenco doctor</code>.</p>
+          <p><b>In a virtual machine</b> this is almost always missing 3D acceleration: niri has no software renderer. Turn on 3D in the VM settings (virt-manager: VirtIO video with 3D acceleration and OpenGL on the Spice display; VirtualBox: VMSVGA with 3D acceleration).</p>
+          <p><b>Otherwise:</b> if <kbd>Mod</kbd> <kbd>T</kbd> opens a terminal but there's no bar or wallpaper, the shell didn't start. Check <code>flamenco logs</code> or run <code>flamenco run --fg</code>.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Icons show up as words ("apps", "settings")</summary>
+        <div class="a"><p>The icon font didn't load. Run <code>flamenco doctor</code> to check that <code>MaterialSymbolsRounded.ttf</code> is installed with the shell, then restart the shell.</p></div>
+      </details>
+      <details>
+        <summary>Plain colored background, no wallpaper</summary>
+        <div class="a"><p><code>~/Pictures/Wallpapers</code> is missing or empty. Add images, or point Settings → Wallpaper → Folder at another folder. If the wallpaper flickers, another wallpaper program (<code>swaybg</code>, <code>swww</code>, DMS) is still running; remove it from your niri config.</p></div>
+      </details>
+      <details>
+        <summary>Qt apps ignore the theme</summary>
+        <div class="a"><p><code>QT_QPA_PLATFORMTHEME</code> isn't set to <code>qt6ct</code>. The niri config that Flamenco writes sets it; log in again and restart the app.</p></div>
+      </details>
+      <details>
+        <summary>A display change left a blank screen</summary>
+        <div class="a"><p>Wait 15 seconds and it reverts on its own. If you already kept it, restore <code>~/.local/state/flamenco/backup/niri-config.before-displays.kdl</code>.</p></div>
+      </details>
+      <details>
+        <summary>The greeter doesn't appear, or the screen is black</summary>
+        <div class="a">
+          <p>Switch to another console with <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>F2</kbd>, log in, and read the logs:</p>
+<pre class="code"><code><span class="p">$ </span>journalctl -b -t flamenco-greeter/niri
+<span class="p">$ </span>flamenco-greeter doctor</code></pre>
+          <p>To go back to your previous display manager meanwhile: <code>sudo systemctl enable -f sddm</code> (or <code>gdm</code>) and reboot.</p>
+        </div>
+      </details>
+      <details>
+        <summary>My password is "wrong" at the login screen but works on the desktop</summary>
+        <div class="a"><p>The greeter uses the keyboard layout from your last sync. Run <code>flamenco-greeter sync</code> after changing layouts in Settings → Keyboard.</p></div>
+      </details>
+      <details>
+        <summary>Locked in by an SDDM lock screen theme</summary>
+        <div class="a"><p>Press <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>L</kbd> on the lock screen to switch to the built-in lock.</p></div>
+      </details>
+    </div>
+    <p class="lead" style="text-align:center;margin-top:32px">More in the <a href="https://github.com/niruxx/Flamenco#troubleshooting">shell's troubleshooting guide</a> and the <a href="https://github.com/niruxx/flamenco-greeter#troubleshooting">greeter's</a>.</p>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta reveal">
+      <svg class="shape a" viewBox="0 0 100 100" aria-hidden="true"><use href="#s-cookie12"/></svg>
+      <svg class="shape b" viewBox="0 0 100 100" aria-hidden="true"><use href="#s-flower"/></svg>
+      <h2>Give your desktop a flourish.</h2>
+      <p>Free and open on GitHub. Stars, issues and plugins welcome.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-filled btn-lg" href="#install"><span class="ms">download</span>Install Flamenco</a>
+        <a class="btn btn-outline btn-lg" href="https://github.com/niruxx/Flamenco"><span class="ms">star</span>Star on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="logo"><span class="ms fill">local_fire_department</span></span>Flamenco</a>
+    <nav aria-label="Footer">
+      <a href="https://github.com/niruxx/Flamenco">Flamenco Shell</a>
+      <a href="https://github.com/niruxx/flamenco-greeter">Flamenco Greeter</a>
+      <a href="https://github.com/niruxx/Flamenco/blob/main/docs/plugins.md">Plugins</a>
+      <a href="https://github.com/niruxx/Flamenco/releases">Releases</a>
+      <a href="https://quickshell.org">Quickshell</a>
+      <a href="https://github.com/YaLTeR/niri">niri</a>
+    </nav>
+    <p>Built with Quickshell for niri and Hyprland.</p>
+  </div>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot">
+  <button class="icon-btn lb-close" data-lb="close" aria-label="Close"><span class="ms">close</span></button>
+  <button class="icon-btn lb-prev" data-lb="-1" aria-label="Previous"><span class="ms">arrow_back</span></button>
+  <button class="icon-btn lb-next" data-lb="1" aria-label="Next"><span class="ms">arrow_forward</span></button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+</dialog>
+</body>
+</html>

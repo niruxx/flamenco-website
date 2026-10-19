@@ -1,0 +1,98 @@
+// Content the page builds itself from. Edit here, not in main.js.
+
+// The 13 Flamenco palettes, taken from Flamenco's docs/assets/palettes-{dark,light}.svg.
+export const PALETTES = {
+  "Flamenco": {
+    dark:  { bg: "#140f10", outline: "#46343a", surface: "#281e20", primary: "#ff5d73", secondary: "#ffb867", tertiary: "#e98aa8", text: "#f5e9e7", subtext: "#b9a3a2", onPrimary: "#2a0910" },
+    light: { bg: "#fbf3f1", outline: "#ddc6c2", surface: "#f4e8e5", primary: "#d0304d", secondary: "#b8740f", tertiary: "#a8456a", text: "#2b1b1c", subtext: "#7b6564", onPrimary: "#ffffff" } },
+  "Breeze": {
+    dark:  { bg: "#1b1e20", outline: "#3f454b", surface: "#2a2e32", primary: "#3daee9", secondary: "#1d99f3", tertiary: "#c678dd", text: "#fcfcfc", subtext: "#a1a9b1", onPrimary: "#0d1a21" },
+    light: { bg: "#eff0f1", outline: "#c3c7cb", surface: "#e3e5e7", primary: "#1d7fc0", secondary: "#1d99f3", tertiary: "#8e44ad", text: "#232629", subtext: "#5f6b77", onPrimary: "#ffffff" } },
+  "Catppuccin": {
+    dark:  { bg: "#11111b", outline: "#3b3d52", surface: "#313244", primary: "#cba6f7", secondary: "#f5c2e7", tertiary: "#89b4fa", text: "#cdd6f4", subtext: "#a6adc8", onPrimary: "#1e1e2e" },
+    light: { bg: "#dce0e8", outline: "#bcc0cc", surface: "#e6e9ef", primary: "#8839ef", secondary: "#ea76cb", tertiary: "#1e66f5", text: "#4c4f69", subtext: "#5c5f77", onPrimary: "#eff1f5" } },
+  "Rosé Pine": {
+    dark:  { bg: "#191724", outline: "#403d52", surface: "#26233a", primary: "#ebbcba", secondary: "#c4a7e7", tertiary: "#9ccfd8", text: "#e0def4", subtext: "#908caa", onPrimary: "#191724" },
+    light: { bg: "#faf4ed", outline: "#dfdad9", surface: "#f2e9e1", primary: "#b4637a", secondary: "#907aa9", tertiary: "#56949f", text: "#575279", subtext: "#797593", onPrimary: "#fffaf3" } },
+  "Nord": {
+    dark:  { bg: "#242933", outline: "#4c566a", surface: "#3b4252", primary: "#88c0d0", secondary: "#81a1c1", tertiary: "#b48ead", text: "#eceff4", subtext: "#aab3c4", onPrimary: "#2e3440" },
+    light: { bg: "#e5e9f0", outline: "#c2c9d6", surface: "#dfe3eb", primary: "#5e81ac", secondary: "#81a1c1", tertiary: "#b48ead", text: "#2e3440", subtext: "#4c566a", onPrimary: "#eceff4" } },
+  "Tokyo Night": {
+    dark:  { bg: "#16161e", outline: "#3b4261", surface: "#24283b", primary: "#7aa2f7", secondary: "#bb9af7", tertiary: "#7dcfff", text: "#c0caf5", subtext: "#a9b1d6", onPrimary: "#16161e" },
+    light: { bg: "#d0d5e3", outline: "#a8aecb", surface: "#d5d6db", primary: "#2e7de9", secondary: "#9854f1", tertiary: "#007197", text: "#3760bf", subtext: "#6172b0", onPrimary: "#e1e2e7" } },
+  "Gruvbox": {
+    dark:  { bg: "#1d2021", outline: "#504945", surface: "#32302f", primary: "#fe8019", secondary: "#fabd2f", tertiary: "#83a598", text: "#ebdbb2", subtext: "#a89984", onPrimary: "#1d2021" },
+    light: { bg: "#f2e5bc", outline: "#bdae93", surface: "#ebdbb2", primary: "#af3a03", secondary: "#b57614", tertiary: "#076678", text: "#3c3836", subtext: "#7c6f64", onPrimary: "#fbf1c7" } },
+  "Everforest": {
+    dark:  { bg: "#232a2e", outline: "#475258", surface: "#343f44", primary: "#a7c080", secondary: "#83c092", tertiary: "#d699b6", text: "#d3c6aa", subtext: "#9da9a0", onPrimary: "#232a2e" },
+    light: { bg: "#efebd4", outline: "#d8d3ba", surface: "#f4f0d9", primary: "#6c7c00", secondary: "#35a77c", tertiary: "#df69ba", text: "#5c6a72", subtext: "#738173", onPrimary: "#fdf6e3" } },
+  "Dracula": {
+    dark:  { bg: "#1e1f29", outline: "#44475a", surface: "#323443", primary: "#bd93f9", secondary: "#ff79c6", tertiary: "#8be9fd", text: "#f8f8f2", subtext: "#b4b6c8", onPrimary: "#21222c" },
+    light: { bg: "#f3f1f8", outline: "#cdc8de", surface: "#ebe8f4", primary: "#7c4dcc", secondary: "#c2307f", tertiary: "#1c8aa3", text: "#282a36", subtext: "#6c6f85", onPrimary: "#ffffff" } },
+  "Kanagawa": {
+    dark:  { bg: "#16161d", outline: "#3f3f52", surface: "#2a2a37", primary: "#7e9cd8", secondary: "#ffa066", tertiary: "#957fb8", text: "#dcd7ba", subtext: "#a6a69c", onPrimary: "#16161d" },
+    light: { bg: "#e7dba0", outline: "#c7bd8f", surface: "#e5ddb0", primary: "#4d699b", secondary: "#cc6d00", tertiary: "#624c83", text: "#545464", subtext: "#68655a", onPrimary: "#f2ecbc" } },
+  "Solarized": {
+    dark:  { bg: "#00212b", outline: "#1b4e5b", surface: "#073642", primary: "#268bd2", secondary: "#2aa198", tertiary: "#d33682", text: "#eee8d5", subtext: "#93a1a1", onPrimary: "#fdf6e3" },
+    light: { bg: "#eee8d5", outline: "#d6cfb8", surface: "#f3ecd8", primary: "#1f71ab", secondary: "#2aa198", tertiary: "#d33682", text: "#073642", subtext: "#586e75", onPrimary: "#fdf6e3" } },
+  "One Dark": {
+    dark:  { bg: "#1e2127", outline: "#434956", surface: "#2f343e", primary: "#61afef", secondary: "#c678dd", tertiary: "#56b6c2", text: "#dcdfe4", subtext: "#9da5b4", onPrimary: "#1e2127" },
+    light: { bg: "#f0f0f1", outline: "#cfd0d4", surface: "#eaeaeb", primary: "#4078f2", secondary: "#a626a4", tertiary: "#0184bc", text: "#383a42", subtext: "#696c77", onPrimary: "#ffffff" } },
+  "Monochrome": {
+    dark:  { bg: "#0e0e0e", outline: "#3a3a3a", surface: "#212121", primary: "#e6e6e6", secondary: "#bdbdbd", tertiary: "#8f8f8f", text: "#ededed", subtext: "#a0a0a0", onPrimary: "#111111" },
+    light: { bg: "#f2f2f2", outline: "#cccccc", surface: "#ebebeb", primary: "#1f1f1f", secondary: "#474747", tertiary: "#6e6e6e", text: "#161616", subtext: "#666666", onPrimary: "#ffffff" } },
+};
+
+// Greeter screenshots that exist for a palette (Flamenco Greeter's docs/screenshots/palette-*.png).
+export const GREETER_PALETTE_SHOTS = {
+  "Catppuccin": "palette-catppuccin", "Rosé Pine": "palette-rosepine", "Nord": "palette-nord",
+  "Gruvbox": "palette-gruvbox", "Dracula": "palette-dracula", "Kanagawa": "palette-kanagawa",
+  "Tokyo Night": "palette-tokyonight", "Everforest": "palette-everforest",
+};
+
+// The guided tour. `box` is the part of the screenshot to zoom into, as fractions [x, y, w, h];
+// keep it in step with the crops in scripts/sync-assets.sh. Leave it out to stay on the whole screen.
+export const TOUR = [
+  { src: "assets/shell/desktop.webp", chapter: "Desktop", title: "A complete desktop shell",
+    text: "Bar, panels, notifications, lock screen, wallpaper and a full Settings app, all in one Material 3 look. The first-run setup walks you through it." },
+  { src: "assets/shell/launcher.webp", chapter: "Launcher", box: [0, 0, 0.245, 0.426], title: "Launcher",
+    text: "Fuzzy app search ranked by how often you use each app. Type = for a calculator, > to run a command, ; for clipboard history." },
+  { src: "assets/shell/control-center.webp", chapter: "Quick settings", box: [0.818, 0.027, 0.182, 0.431], title: "Control center",
+    text: "Volume and brightness sliders, and tiles for Wi-Fi, Bluetooth, DND, night light, VPN, recording and more. Pick, reorder and size them yourself." },
+  { src: "assets/shell/calendar.webp", chapter: "Dashboard", box: [0.385, 0.033, 0.227, 0.41], title: "Dashboard",
+    text: "Opens from the clock: calendar and agenda, weather, media with a visualizer, wallpapers and live system graphs." },
+  { src: "assets/shell/settings-appearance.webp", chapter: "Settings", box: [0.289, 0.238, 0.422, 0.557], title: "A real Settings app",
+    text: "28 pages, from palettes and the bar to displays, firewall and Flatpak permissions. Search any setting with Ctrl+F. Every change applies live." },
+  { src: "assets/shell/settings-displays.webp", chapter: "Displays", box: [0.289, 0.238, 0.422, 0.557], title: "Safe display changes",
+    text: "Resolution, refresh rate, scale, rotation and VRR, with drag-to-arrange. A change you don't confirm reverts by itself after 15 seconds." },
+  { src: "assets/shell/power-menu.webp", chapter: "Power", box: [0.344, 0.39, 0.3, 0.21], title: "Power menu",
+    text: "Lock, suspend, log out, restart or shut down, with keyboard navigation. The destructive ones need a 3-second hold." },
+  { src: "assets/shell/control-center-light.webp", chapter: "Light mode", box: [0.818, 0.027, 0.182, 0.431], title: "Dark and light",
+    text: "Every palette is hand-tuned in both modes. Switch by hand, at sunset, or on a schedule." },
+  { src: "assets/greeter/login-dark.webp", chapter: "Login", title: "Flamenco Greeter",
+    text: "The same clock, avatar, password pill and motion as the lock screen, at the greetd login screen, with your palette and wallpaper." },
+  { src: "assets/greeter/fingerprint.webp", chapter: "Fingerprint", title: "Fingerprint ready",
+    text: "The reader starts listening the moment you're picked. A typed password always works too." },
+  { src: "assets/greeter/palette-catppuccin.webp", chapter: "Palettes", title: "Wears every palette",
+    text: "Catppuccin, Rosé Pine, Nord, Gruvbox, Dracula, Kanagawa, Tokyo Night, Everforest and more, or colors from your wallpaper." },
+];
+
+// Close-ups for the Settings carousel.
+export const SETTINGS_PAGES = [
+  ["settings-appearance", "Appearance", "Palette, mode, accent, roundness, fonts and motion"],
+  ["settings-app-theming", "App theming", "Qt 5/6, GTK 3/4 and KDE colors follow your palette"],
+  ["settings-bar", "Bar", "Position, style, thickness and every widget"],
+  ["settings-windows", "Windows & layout", "Gaps, radius, focus ring and shadows, written to your compositor"],
+  ["settings-workspaces", "Workspaces", "Named workspaces pinned to a screen"],
+  ["settings-edges", "Screen edges", "Hot corners on every screen"],
+  ["settings-keyboard", "Keyboard", "Layouts, repeat and shortcuts, recorded live"],
+  ["settings-displays", "Displays", "Arrange, scale, rotate, with a 15-second safety net"],
+  ["settings-screenshots", "Screenshots", "Area, screen or window; clipboard or disk"],
+  ["settings-defaults", "Default apps", "Browser, files, mail, media and more"],
+  ["settings-autostart", "Auto-start", "XDG autostart entries and plain commands"],
+  ["settings-flatpak", "Flatpak permissions", "Per-app files, network, devices and features"],
+];
+
+// A real video for the tour. Drop a screen recording at assets/video/tour.mp4 and a "Video" tab
+// appears above the guided tour on its own; or put a YouTube video id in `youtube` instead.
+export const TOUR_VIDEO = { file: "assets/video/tour.mp4", youtube: "" };
