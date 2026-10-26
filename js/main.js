@@ -18,7 +18,7 @@ const el = (tag, attrs = {}, html = "") => {
 
 const systemDark = matchMedia("(prefers-color-scheme: dark)");
 const theme = {
-  palette: PALETTES[store.get("flamenco-palette")] ? store.get("flamenco-palette") : "Flamenco",
+  palette: PALETTES[store.get("flamenco-palette")] ? store.get("flamenco-palette") : "Material Design",
   mode: ["dark", "light"].includes(store.get("flamenco-theme")) ? store.get("flamenco-theme") : "auto",
 };
 const effectiveMode = () => theme.mode === "auto" ? (systemDark.matches ? "dark" : "light") : theme.mode;
@@ -449,15 +449,17 @@ const cmpVer = (a, b) => {
 
 async function updateVersions() {
   try {
-    const shell = await cached("flamenco-shell-release", async () => {
-      const r = await fetch("https://api.github.com/repos/niruxx/Flamenco/releases/latest");
+    // Flamenco keeps every package build in build-history/ (GitHub Releases lag behind).
+    const shell = await cached("flamenco-shell-build", async () => {
+      const r = await fetch("https://api.github.com/repos/niruxx/Flamenco/contents/build-history");
       if (!r.ok) throw 0;
-      const j = await r.json();
-      const pkg = j.assets.find(a => a.name.endsWith(".pkg.tar.zst"));
-      return pkg && { tag: j.tag_name, url: pkg.browser_download_url };
+      const re = /^flamenco-shell-([\d.]+-\d+)-any\.pkg\.tar\.zst$/;
+      const pkgs = (await r.json()).map(f => f.name.match(re)).filter(Boolean);
+      const best = pkgs.sort((a, b) => cmpVer(a[1], b[1])).pop();
+      return best && { tag: best[1], url: `https://github.com/niruxx/Flamenco/raw/main/build-history/${best[0]}` };
     });
     if (shell) {
-      const v = shell.tag.replace(/-\d+$/, "").replace(/^v/, "");
+      const v = shell.tag.replace(/-\d+$/, "");
       $$("[data-shell-version]").forEach(n => n.textContent = `v${v}`);
       $$("[data-shell-version-long]").forEach(n => n.textContent = `Version ${v} · the desktop`);
       $$("[data-shell-pkg-url]").forEach(n => n.textContent = shell.url);

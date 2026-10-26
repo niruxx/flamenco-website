@@ -2,7 +2,7 @@
 
 The website for [Flamenco Shell](https://github.com/niruxx/Flamenco) and
 [Flamenco Greeter](https://github.com/niruxx/flamenco-greeter): a guided tour, screenshots,
-features, the 13 palettes (the page re-themes itself live) and install steps for both.
+features, the 18 palettes (the page re-themes itself live) and install steps for both.
 
 Plain HTML, CSS and JavaScript. No build step, no dependencies.
 
@@ -29,11 +29,11 @@ python3 -m http.server 8000      # then open http://localhost:8000
 | Screenshots | Run `./scripts/sync-assets.sh` (needs `curl`, `cwebp`, `ffmpeg`). It pulls the latest screenshots from both repos and converts them to WebP |
 | Tour chapters and captions | `TOUR` in `js/data.js` |
 | Settings carousel | `SETTINGS_PAGES` in `js/data.js` |
-| Palettes | `PALETTES` in `js/data.js` |
+| Palettes | `PALETTES` in `js/data.js` (copied from Flamenco's `shell/Commons/Palettes.qml`) |
 | Text, features, install steps | `index.html` |
 
 The version numbers and download links for the prebuilt packages update themselves from GitHub
-(the shell's latest release, and the newest folder in the greeter's `History Builds/`).
+(the newest package in the shell's `build-history/`, and the newest folder in the greeter's `History Builds/`).
 
 ### Adding a real video
 

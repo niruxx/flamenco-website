@@ -54,7 +54,7 @@ for f in banner-dark banner-light palettes-dark palettes-light; do
 done
 
 echo "Flamenco Greeter"
-for f in login-dark login-light user-picker session-picker wrong-password \
+for f in login-dark login-light user-picker session-picker wrong-password widgets widgets-edit \
          fingerprint fingerprint-miss fingerprint-typing \
          palette-catppuccin palette-rosepine palette-nord palette-gruvbox \
          palette-dracula palette-kanagawa palette-tokyonight palette-everforest; do
